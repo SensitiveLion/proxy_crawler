@@ -1,3 +1,5 @@
-source 'https://rubygems.org'
-gem 'sinatra'
-gem 'pry'
+source "https://rubygems.org"
+require "pry"
+require "mechanize"
+require "nokogiri"
+require "open-uri"
