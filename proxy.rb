@@ -25,6 +25,7 @@ files = ["ad_servers", "emd", "exp", "fsa", "grm", "hfs", "hjk", "mmt", "pha",
 files.each do |type|
   proxy_form.q = "http://hosts-file.net/#{type}.txt"
   proxy = agent.submit(proxy_form)
+  doc = Nokogiri::HTML(open(proxy.uri.to_s))
   pry
 end
 
