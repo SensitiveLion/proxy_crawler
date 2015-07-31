@@ -26,7 +26,9 @@ files.each do |type|
   proxy_form.q = "http://hosts-file.net/#{type}.txt"
   proxy = agent.submit(proxy_form)
   doc = Nokogiri::HTML(open(proxy.uri.to_s))
-  pry
+  doc_text = doc.css("p").to_s
+  text = doc_text.split("\r\n")
+  binding.pry
 end
 
 
