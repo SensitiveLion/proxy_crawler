@@ -1,0 +1,45 @@
+body{
+  text-align: center;
+  background-color: #4E4F50;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+ul{
+  list-style-type: none;
+}
+
+h2{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+h3{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+button, .button {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #F00092;
+}
+
+.head {
+  font-size: 4em;
+  color: white;
+}
+
+.panel {
+  background-color: #1E354B;
+  border-color: #1E354B;
+}
+.panel h1, .panel h3, .panel h5,.panel h6, .panel p, .panel li, .panel dl {
+  line-height: 1.5em;
+  color: #ffffff;
+}
+
+.panel h2, .panel h4 {
+  line-height: 1.5em;
+  color: #FD008E;
+}
+
+.title {
+  font-size: 2em;
+}

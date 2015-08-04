@@ -1,0 +1,58 @@
+<div class="title">
+  <div class="panel">
+    <h1>The Proxy Bot</h1>
+    <h2>Schedule a bot to keep your hosts files up to date</h2>
+  </div>
+</div>
+<ul class="large-block-grid-2">
+  <li>
+    <div class="panel">
+      <h2>Schedule a job</h2>
+      <div class="row">
+        <div class="small-8 large-centered columns">
+          <form action='/' method='POST'>
+            <select name='interval'>
+              <option value=":hour">Every other day</option>
+              <option value="6.hours">Every six hours</option>
+              <option value="12.hours">Every twelve hours</option>
+              <option value=":day">Every day</option>
+              <option value="2.days">Every other day</option>
+              <option value="3.days">Every three days</option>
+              <option value="4.days">Every four day</option>
+              <option value="5.days">Every five day</option>
+              <option value=":week">Every week</option>
+              <option value=":weekend">Every weekend</option>
+              <option value=":weekday">Every weekday</option>
+            </select>
+            <p></p>
+            <input type = "time" name='time' size=''>
+            <button type='submit' href="#" class="button round">Schedule</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="panel">
+      <h2>Current schedule</h2>
+      <h3>Hosts-files will be pulled every</h3>
+      <h4>
+        <% if @interval == nil %>
+          NOPE
+        <% else %>
+          <%= @interval %>
+        <% end %>
+      </h4>
+      <h3>at</h3>
+      <h4>
+        <% if @time == nil %>
+          NOPE
+        <% else %>
+          <%= @time %>
+        <% end %>
+      </h4>
+    </div>
+  </li>
+</ul>
+
+
