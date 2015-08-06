@@ -34,8 +34,12 @@ files.each do |type|
   doc_text_full = doc.css("p").to_s
   doc_text_parse = doc_text_full.gsub(/^<p>.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n/, '')
   doc_text_end_parse = doc_text_parse.gsub(/# Hosts:.*\n<\/p>/,'')
-  doc_text = doc_text_end_parse.gsub(/#\r\n/,'')
-  @hosts_file << doc_text
+  doc_text_ad_parse = doc_text_end_parse.gsub(/#\r\n/,'')
+  doc_text = doc_text_ad_parse.gsub(/\t/,"      ")
+  text = doc_text.split("\r\n")
+  text.each do |t|
+    @hosts_file << t
+  end
   print "."
 end
 
