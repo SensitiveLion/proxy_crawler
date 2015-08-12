@@ -21,13 +21,15 @@ until proxy.form.field.name == "q"
   print "."
 end
 
-files = ["ad_servers", "emd", "exp", "fsa", "grm", "hfs", "hjk", "mmt", "pha",
-          "psh", "wrz"]
+files = {ad_servers: "ad_servers", malware: "emd", exploit: "exp",
+        fraud: "fsa", spam: "grm", hpspam: "hfs", hijacked: "hjk",
+        misleading: "mmt", illegal_pharma:"pha", phishing: "psh",
+        piracy: "wrz"}
 
 @hosts_file = []
 
-files.each do |type|
-  proxy_form.q = "http://hosts-file.net/#{type}.txt"
+files.each do |key, value|
+  proxy_form.q = "http://hosts-file.net/#{value}.txt"
   proxy = agent.submit(proxy_form)
   print "."
   doc = Nokogiri::HTML(open(proxy.uri.to_s))
@@ -37,6 +39,7 @@ files.each do |type|
   doc_text_ad_parse = doc_text_end_parse.gsub(/#\r\n/,'')
   doc_text = doc_text_ad_parse.gsub(/127.0.0.1\t/,'')
   text = doc_text.split("\r\n")
+
   text.each do |t|
     @hosts_file << t
   end
