@@ -8,11 +8,9 @@ require "open-uri"
     agent = Mechanize.new
     proxy = agent.get("http://www.proxy4free.com/list/webproxy1.html")
     link = proxy.links[count]
-    binding.pry
     if link.uri.to_s == ""
       count -= 1
       link = proxy.links[count]
-      binding.pry
     end
     proxy = link.click
     proxy_form = proxy.forms.last
@@ -25,27 +23,21 @@ require "open-uri"
       proxy = link.click
       proxy_form = proxy.forms.last
       print "."
-      binding.pry
     end
 
-    files = {ad_servers: "ad_servers", malware: "emd", exploit: "exp",
-            fraud: "fsa", spam: "grm", hpspam: "hfs", hijacked: "hjk",
-            misleading: "mmt", illegal_pharma:"pha", phishing: "psh",
-            piracy: "wrz"}
+    blocklist = {ssh: "ssh", mail: "mail", Http_apache: "apache",
+            imap: "imap", ftp: "ftp", sip: "sip", bots: "bots",
+            brute_force_login: "bruteforcelogin", ircbot:"ircbot"}
 
 
-    files.each do |key, value|
+    blocklist.each do |key, value|
       @hosts_file = []
-      proxy_form.q = "http://hosts-file.net/#{value}.txt"
+      proxy_form.q = "http://lists.blocklist.de/lists/#{value}.txt"
       proxy = agent.submit(proxy_form)
       print "."
       doc = Nokogiri::HTML(open(proxy.uri.to_s))
       doc_text_full = doc.css("p").to_s
-      doc_text_parse = doc_text_full.gsub(/^<p>.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n/, '')
-      doc_text_end_parse = doc_text_parse.gsub(/# Hosts:.*\n<\/p>/,'')
-      doc_text_ad_parse = doc_text_end_parse.gsub(/#\r\n/,'')
-      doc_text = doc_text_ad_parse.gsub(/127.0.0.1\t/,'')
-      text = doc_text.split("\r\n")
+      text = doc_text_full.split("\n")
 
       text.each do |t|
         @hosts_file << t
@@ -55,7 +47,7 @@ require "open-uri"
       File.open(fname, "w+") do |f|
         f.puts(@hosts_file)
       end
-      print "."
+      print ""
     end
 
     print "done"
